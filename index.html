@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UniResolve | Complaint Management System</title>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+ background-color: #0B1220;
+  color: #E5E7EB;
+  font-size: 0.95rem;
+}
+header {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(90deg, #020267ff 0%, #03bfafff 100%);
+  color: #FFFFFF;
+  font-size: 2.5rem;
+  font-weight: bolder;
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  padding: 0 2vw;
+  box-sizing: border-box;
+  /* z-index: 10; */
+}
+#mainLogo {
+  height: 65px;
+  width: auto;
+  margin-right: 18px;
+}
+.headerTitle {
+  flex: 1;
+  text-align: left;
+  font-size: 2.2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.headerButton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.headerButton button {
+  background: #020267ff;
+  color: #fff;
+  padding: 6px 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  margin: 0;
+  height: 32px;
+  line-height: 1;
+}
+.headerButton button:hover {
+  background: #57a470ff;
+  color: black;
+}
+
+
+.sect1 {
+  height: 87vh;
+  width: 100%;
+  background: linear-gradient(90deg, #020267ff 0%, #03bfafff 100%);
+  padding: 48px 0 32px 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  scrollbar-width:none;
+}
+.sect1 h1 {
+  color: #fff;
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+.sect1 p {
+  color: #E5E7EB;
+  font-size: 1.25rem;
+  max-width: 700px;
+  margin: 0 auto 28px auto;
+}
+.sect1 .buttons {
+  margin-bottom: 24px;
+}
+.sect1 .buttons a {
+  background: #03bfafff;
+  color: #111827;
+  font-weight: 700;
+  padding: 14px 36px;
+  border-radius: 10px;
+  font-size: 1.15rem;
+  text-decoration: none;
+  margin-right: 12px;
+  box-shadow: 0 2px 8px rgba(3,191,175,0.15);
+}
+.sect1 .buttons a:hover {
+  background: #fff;
+  color: #03bfafff;
+}
+.sect1 .features {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.sect1 .features span {
+  background: #111827;
+  color: #03bfafff;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  display: inline-block;
+}
+/* How It Works Section */
+.sect2 {
+  height: 87vh;
+  background: #111827;
+  padding: 48px 0;
+}
+.sect2 h2 {
+  text-align: center;
+  color: #03bfafff;
+  font-size: 2rem;
+  margin-bottom: 32px;
+}
+
+.sect2 .roles {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.sect2 .role {
+  background: #232e3c;
+  border-radius: 16px;
+  padding: 32px 24px;
+  min-width: 220px;
+  max-width: 320px;
+  flex: 1;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 12px rgba(3,191,175,0.08);
+}
+.sect2 .role img {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 10px;
+}
+.sect2 .role h3 {
+  color: #03bfafff;
+}
+.sect2 .role ul {
+  color: #E5E7EB;
+  text-align: left;
+  line-height: 1.7;
+  font-size: 1rem;
+}
+/* Footer */
+footer {
+  background: rgba(3,191,175,0.08);
+  color: #E5E7EB;
+  padding: 10px 0;
+  text-align: center;
+  font-size: 0.9rem;
+}
+footer p {
+  margin: 5px 0;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  
+  background: #111827;
+  color: #E5E7EB;
+  padding: 24px 32px;
+  border-radius: 12px;
+  min-width: 260px;
+  max-width: 90vw;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+}
+.modal-content .close {
+  position: absolute;
+  right: 18px;
+  top: 10px;
+  font-size: 1.5rem;
+  color: #888;
+  cursor: pointer;
+}
+.modal-content .close:hover { color: #E5E7EB; }
+
+.modal-content a {
+  
+  display: block;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(320deg, #020267ff 0%, #03bfafff 100%);
+  transition: 0.3s;
+}
+.modal-content a:hover {
+  background: linear-gradient(90deg, #4A3678, #146A63);
+  color: black;
+}
+@media (max-width: 1024px) {
+  header {
+    font-size: 2rem;
+    padding: 0 1vw;
+  }
+  #mainLogo {
+    height: 45px;
+  }
+  .sect1 {
+    padding: 24px 0;
+    height: auto;
+    min-height: 70vh;
+  }
+  .sect2 {
+    padding: 24px 0;
+    height: auto;
+    min-height: 70vh;
+  }
+  .sect1 h1 {
+    font-size: 2rem;
+  }
+  .sect1 p {
+    font-size: 1.1rem;
+  }
+  .sect1 .features {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .sect2 h2 {
+    font-size: 1.5rem;
+  }
+  .sect2 .roles {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  .sect2 .role {
+    max-width: 60vw;
+    width: 50vw;
+  }
+  /* .modal-content {
+    width: 30vw;
+    padding: 30px;
+    padding: 20px;
+  } */
+  footer {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 600px) {
+  header {
+    font-size: 1rem;
+    height: 8vh;
+    padding: 0 2vw;
+    /* flex-direction: column; */
+    /* align-items: flex-start; */
+  }
+  #mainLogo {
+    height: 28px;
+    margin-bottom: 6px;
+  }
+  .headerTitle {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+  }
+  .headerButton {
+    gap: 6px;
+  }
+  .headerButton button {
+    padding: 4px 10px;
+    font-size: 0.85rem;
+    height: 26px;
+    border-radius: 7px;
+  }
+  .sect1 {
+    padding: 10px 0;
+    height: auto;
+    min-height: 70vh;
+    /* justify-content: flex-start; */
+  }
+  .sect1 h1 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+  .sect1 p {
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+  }
+  .sect1 .buttons {
+    margin-bottom: 16px;
+  }
+  .sect1 .buttons a {
+    font-size: 0.95rem;
+    padding: 8px 14px;
+    margin-right: 6px;
+  }
+  .sect1 .features {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+    margin-bottom: 10px;
+  }
+  .sect1 .features span {
+    font-size: 0.95rem;
+    padding: 8px 12px;
+    margin: 0 auto;
+  }
+  .sect2 {
+    padding: 10px 2vw;
+    height: auto;
+    min-height: 60vh;
+  }
+  .sect2 h2 {
+    font-size: 1rem;
+    margin-bottom: 18px;
+  }
+  .sect2 .roles {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+  .sect2 .role {
+    max-width: 40vw;
+    width: 40vw;
+    padding: 12px 4px;
+    font-size: 0.9rem;
+  }
+  .sect2 .role img {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 6px;
+  }
+  .sect2 .role h3 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+  .sect2 .role ul {
+    font-size: 0.9rem;
+    padding-left: 16px;
+  }
+  .modal-content {
+    width: 25vw;
+    padding: 15px;
+    font-size: 0.95rem;
+    margin: 0px 16px;
+  }
+  footer {
+    font-size: 0.75rem;
+    padding: 6px 0;
+  }
+
+
+}
+</style>
+</head>
+<body>
+<header>
+  <img id="mainLogo" src="LOGO1.png" alt="Logo">
+  <span class="headerTitle">UniResolve</span>
+  <div class="headerButton">
+    <button id="loginBtn">Log In</button>
+    <button id="registerBtn">Register</button>
+  </div>
+</header>
+
+<!-- Section 1: Hero -->
+<div class="sect1">
+  <h1>Resolve campus complaints faster, transparently, together</h1>
+  <p>One platform for students, departments, and admins to lodge, track, and resolve complaints—with real-time updates, notifications, and audit-ready reports.</p>
+  <div class="buttons">
+    <!-- <a href="#">Book a demo</a> -->
+    <a href="#howitworks">Explore how it works</a>
+  </div>
+  <div class="features">
+    <span>✅ Real-time status tracking</span>
+    <span>✅ Issue Resolution</span>
+    <span>✅ Secure comlaint management</span>
+    <!-- <span>✅ Export to PDF/Excel</span> -->
+  </div>
+</div>
+
+<!-- Section 2: How It Works -->
+<div id="howitworks" class="sect2">
+    <h2>How It Works</h2>
+    
+    <div class="roles">
+      <div class="role">
+        <img src="std1.png" alt="Student">
+        <h3>Students</h3>
+        <ul>
+          <li>Register/login securely</li>
+          <li>Lodge complaints with attachments</li>
+          <li>Track status in real time</li>
+          <li>Get email/SMS updates</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <img src="dept1-removebg-preview.png" alt="Department">
+        <h3>Departments</h3>
+        <ul>
+          <li>View assigned complaints in one place</li>
+          <li>Update status, add remarks</li>
+          <li>View reports of complaint resolution history</li>
+        </ul>
+      </div>
+      <div class="role">
+        <img src="admin-removebg-preview.png" alt="Admin">
+        <h3>Admins</h3>
+        <ul>
+          <li>Manage users and departments</li>
+          <li>View all complaints and track overall system activity</li>
+          <li>Assign complaints to departments efficiently.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<!-- Footer -->
+<footer>
+  <p><u>Contact Us</u></p>
+  <p>Email: support@uniresolve.com | Phone: 9916976526</p>
+  <p>Address:1st Floor, Royal Embassy , Ananta Nagara, Manipal</p>
+  <p>&copy; 2023 UniResolve. All rights reserved.</p>
+</footer>
+
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeLogin">&times;</span>
+    <h3>Login Options</h3>
+    <a href="admin_module/ad_login.php">Admin Login</a>
+    <a href="user_module/user_login.php">User Login</a>
+    <a href="dept_module/dept_login.php">Department Login</a>
+  </div>
+</div>
+
+<!-- REGISTER MODAL -->
+<div id="registerModal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeRegister">&times;</span>
+    <h3>Registration Options</h3>
+    <a href="user_module/user_registration.php">User Registration</a>
+    <a href="dept_module/dept_registration.php">Department Registration</a>
+  </div>
+</div>
+
+<script>
+// Open modals
+document.getElementById('loginBtn').onclick = () => document.getElementById('loginModal').style.display = 'flex';
+document.getElementById('registerBtn').onclick = () => document.getElementById('registerModal').style.display = 'flex';
+// Close modals
+document.getElementById('closeLogin').onclick = () => document.getElementById('loginModal').style.display = 'none';
+document.getElementById('closeRegister').onclick = () => document.getElementById('registerModal').style.display = 'none';
+// Close on outside click
+window.onclick = function(event) {
+  if (event.target == document.getElementById('loginModal')) {
+    document.getElementById('loginModal').style.display = 'none';
+  }
+  if (event.target == document.getElementById('registerModal')) {
+    document.getElementById('registerModal').style.display = 'none';
+  }
+};
+</script>
+</body>
+</html>
